@@ -39,3 +39,4 @@ target/
 tmp/
 gen-external-apklibs/
 out/
+test-output.html
