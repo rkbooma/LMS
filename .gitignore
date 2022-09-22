@@ -40,3 +40,4 @@ tmp/
 gen-external-apklibs/
 out/
 test-output.html
+.DS_Store
