@@ -2,8 +2,8 @@
 Feature: Login
   I want to use this template for my feature file
 
-  @tag1
-  Scenario: Successful Login with valid credentials
+ @tag1
+ Scenario: Successful Login with valid credentials
   
     Given User launch chrome browser
     When User opens the URL "https://lms-frontend-phase2.herokuapp.com/"
