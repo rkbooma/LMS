@@ -11,6 +11,6 @@ Feature: Login
     When User clicks the Login button after entering invalid password "InvalidPasswd"
     Then User should receive the message "Invalid username and password Please try again"
     When User clicks the Login button after entering invalid username "InvalidUname"
-    Then User should get the message "Invalid username and password Please try again"
+    Then User should receive the message "Invalid username and password Please try again"
     When User clicks the Login button after entering valid username "LMS" and password "LMS"
     Then User should see the LMS Home page

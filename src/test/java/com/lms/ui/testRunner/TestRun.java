@@ -10,10 +10,10 @@ import io.cucumber.junit.CucumberOptions;
 @CucumberOptions
 (
 		
-		features= ".//Features/User.feature",
+		features= "./Features/",
 		glue = {"helpers","com.lms.ui.stepDefs"},
 		dryRun = false,
-		monochrome =true,
+		monochrome = true,
 		plugin = {"pretty", "html:test-output.html"}
 		
 		)
