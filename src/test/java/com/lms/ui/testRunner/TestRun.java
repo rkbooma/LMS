@@ -9,11 +9,14 @@ import io.cucumber.junit.CucumberOptions;
 @RunWith (Cucumber.class)
 @CucumberOptions
 (
-		features= ".//Features/LoginT.feature",
-		glue = "com.lms.ui.stepDefs",
+		
+		features= "./Features/",
+		glue = {"helpers","com.lms.ui.stepDefs"},
 		dryRun = false,
-		monochrome =true,
-		plugin = {"pretty", "html:test-output.html"}
+		monochrome = true,
+		plugin={"html:target/cucumber-html-report", "json:target/cucumber.json",
+				 "pretty:target/cucumber-pretty.txt","usage:target/cucumber-usage.json", 
+				"junit:target/cucumber-results.xml"}
 		
 		)
 public class TestRun {

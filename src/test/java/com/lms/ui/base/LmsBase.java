@@ -3,13 +3,10 @@ package com.lms.ui.base;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.time.Duration;
 import java.util.Properties;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-
-import com.lms.ui.util.LmsUtil;
 
 
 public class LmsBase {
@@ -39,8 +36,8 @@ public class LmsBase {
 
 		driver.manage().window().maximize();
 		driver.manage().deleteAllCookies();
-		driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(LmsUtil.PAGE_LOAD_TIMEOUT));
-		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(LmsUtil.IMPLICIT_WAIT));
+//		driver.manage().timeouts().pageLoadTimeout(Duration.ofSeconds(LmsUtil.PAGE_LOAD_TIMEOUT));
+//		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(LmsUtil.IMPLICIT_WAIT));
 
 		
 	}

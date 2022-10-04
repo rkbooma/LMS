@@ -5,7 +5,6 @@ import org.junit.Assert;
 import com.lms.ui.base.LmsBase;
 import com.lms.ui.pageObjects.LoginPage;
 
-import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -23,6 +22,7 @@ public class LoginSteps extends LmsBase {
 	
 	@Given("User launch chrome browser")
 	public void user_launch_chrome_browser() {
+//		loginPage = new LoginPage();
 		initialization();
 	}
 
@@ -44,7 +44,7 @@ public class LoginSteps extends LmsBase {
 	}
 
 	@Then("User should receive the message {string}")
-	public void user_should_receive_the_message(String msg) {
+	public void user_should_receive_the_message(String msg) throws InterruptedException {
 		String pageAlert=loginPage.getLoginAlert();
 		Assert.assertEquals(pageAlert, msg);
 	}
@@ -57,12 +57,6 @@ public class LoginSteps extends LmsBase {
 		//loginPage.clickLoginButton();
 	}
 	
-	@Then("User should get the message {string}")
-	public void user_should_get_the_message(String msg) {
-		//String pageAlert=loginPage.getLoginAlert();
-		//Assert.assertEquals(pageAlert, msg);
-	}
-
 	@When("User clicks the Login button after entering valid username {string} and password {string}")
 	public void user_clicks_the_login_button_after_entering_valid_username_and_password(String uName, String passWd) throws InterruptedException {
 		loginPage.enter_UserName(uName);
@@ -74,11 +68,5 @@ public class LoginSteps extends LmsBase {
 	public void user_should_see_the_lms_home_page() {
 		String logPgTxt = loginPage.LocateHomePage();
 		Assert.assertEquals(logPgTxt, "LMS - Learning Management System");
-	}
-	
-	@After
-	public void tearDown() throws InterruptedException{
-		Thread.sleep(2000);
-		driver.quit();
 	}
 }

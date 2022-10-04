@@ -28,7 +28,7 @@ public class LoginPage extends LmsBase {
 	
 
 	public void enter_UserName(String uName) {
-		
+		PageFactory.initElements(driver, this);
 		userPassword.clear();
 		userName.click();
 		userName.sendKeys(uName);
