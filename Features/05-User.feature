@@ -1,5 +1,5 @@
 
-Feature: Manage User Page
+Feature: User Page
 
  Scenario: Verify landing in Manage user page
     Given User is on any page after Login LMS
@@ -172,8 +172,8 @@ Scenario: Verify and validate Delete Icon
     
     Scenario: Validating the presence of input number arrows in postal code input field
     Given User is on "User details"window
-    When User clicks postal code input field
-    Then User should see the input Number arrows in the postal code input field
+    #When User clicks postal code input field
+    #Then User should see the input Number arrows in the postal code input field
     
     
     

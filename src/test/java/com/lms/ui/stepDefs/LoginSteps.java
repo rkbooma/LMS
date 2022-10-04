@@ -22,6 +22,7 @@ public class LoginSteps extends LmsBase {
 	
 	@Given("User launch chrome browser")
 	public void user_launch_chrome_browser() {
+//		loginPage = new LoginPage();
 		initialization();
 	}
 

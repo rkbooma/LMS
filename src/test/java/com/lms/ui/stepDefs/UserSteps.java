@@ -1,10 +1,11 @@
 package com.lms.ui.stepDefs;
 
-import org.junit.After;
 import org.junit.Assert;
 
 import com.lms.ui.base.LmsBase;
+import com.lms.ui.pageObjects.BatchPage;
 import com.lms.ui.pageObjects.HomePage;
+import com.lms.ui.pageObjects.LoginPage;
 import com.lms.ui.pageObjects.UserPage;
 
 import io.cucumber.java.en.Given;
@@ -12,38 +13,52 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
 public class UserSteps extends LmsBase {
+	BatchPage batchPage;
+	LoginPage loginPage;
+	HomePage homePage;
 
 	UserPage manageUserPage;
 	
 
 	@Given("User is on any page after Login LMS")
 	public void user_is_on_any_page_after_Login_LMS() throws InterruptedException {
-
+		Thread.sleep(4000);
+		System.out.println("=====UserPage====");
+		loginPage = new LoginPage();
+		homePage = new HomePage();
+		batchPage = new BatchPage();
 		manageUserPage = new UserPage();
+		
 		
 	}
 
 	@When("User clicks the Tab User")
-	public void user_clicks_the_tab_user() {
+	public void user_clicks_the_tab_user() throws InterruptedException {
+		manageUserPage = new UserPage();
 		manageUserPage.clickUsertab();
+		
+		Thread.sleep(1000);
 	}
 
 	@Then("User should see the Manage user page")
-	public void user_should_see_the_manage_user_page() {
-
+	public void user_should_see_the_manage_user_page() throws InterruptedException {
+		manageUserPage = new UserPage();
 		String title = manageUserPage.Locate_userPagetitle();
 		Assert.assertEquals(title, "Manage User");
+		Thread.sleep(1000);
 	}
 
 	@When("User is on the Manage user page after clicking User Tab")
 	public void user_is_on_the_manage_user_page_after_clicking_user_tab() throws InterruptedException {
 		String title = manageUserPage.Locate_userPagetitle();
 		Assert.assertEquals(title, "Manage User");
+		Thread.sleep(1000);
 	}
 
 	@Then("User should see the pagination controls below data table")
 	public void user_should_see_the_pagination_controls_below_data_table() throws InterruptedException {
 		manageUserPage.locatePaginationControl();
+		Thread.sleep(1000);
 
 	}
 
@@ -184,7 +199,8 @@ public class UserSteps extends LmsBase {
 	}
 
 	@Then("User should see the text  {string} beow the user table")
-	public void user_should_see_the_text_beow_the_user_table(String string) {
+	public void user_should_see_the_text_beow_the_user_table(String string) throws InterruptedException {
+		Thread.sleep(5000);
 		manageUserPage.tableFooter();
 
 	}
@@ -385,11 +401,13 @@ public class UserSteps extends LmsBase {
 
 	@Then("User should see the Search input field after the delete icon")
 	public void user_should_see_the_search_input_field_after_the_delete_icon() {
+		manageUserPage = new UserPage();
 		manageUserPage.verify_searchfield_display();
 	}
 
 	@When("User types Name to search")
 	public void user_types_name_to_search() {
+		
 		manageUserPage.searchfield();
 	}
 
@@ -400,7 +418,7 @@ public class UserSteps extends LmsBase {
 	}
 
 	@When("User types random text in search field which has no matching entry")
-	public void user_types_random_text_in_search_field_which_has_no_matching_entry() {
+	public void user_types_random_text_in_search_field_which_has_no_matching_entry() throws InterruptedException {
 		manageUserPage.check_random_user_in_searchfield();
 	}
 
@@ -414,12 +432,14 @@ public class UserSteps extends LmsBase {
 		driver.navigate().back();
 		manageUserPage = new UserPage();
 		manageUserPage.clickUsertab();
+		
 	}
 
 	@When("User clicks ID in any row")
-	public void user_clicks_id_in_any_row() {
+	public void user_clicks_id_in_any_row() throws InterruptedException {
 
 		manageUserPage = new UserPage();
+		Thread.sleep(2000);
 		manageUserPage.click_ID();
 
 	}
@@ -449,8 +469,9 @@ public class UserSteps extends LmsBase {
 	}
 
 	@Then("User should see User details window with heading {string}")
-	public void user_should_see_user_details_window_with_heading(String string) {
+	public void user_should_see_user_details_window_with_heading(String string) throws InterruptedException {
 		manageUserPage.display_user_details();
+		Thread.sleep(3000);
 		manageUserPage.cancel_user_window();
 	}
 
@@ -549,13 +570,15 @@ public class UserSteps extends LmsBase {
 	public void user_is_on_window_(String string) {
 		manageUserPage = new UserPage();
 		manageUserPage.display_user_details();
-		manageUserPage.cancel_user_window();
-		driver.navigate().back();
-		driver.navigate().back();
+		//manageUserPage.cancel_user_window();
+//		driver.navigate().back();
+//		manageUserPage.Click_Assignment_Tab();
+		//driver.navigate().back();
 	}
 
 	@When("User clicks the drop down icon for state")
 	public void user_clicks_the_drop_down_icon_for_state() throws InterruptedException {
+		Thread.sleep(3000);
 		manageUserPage.select_State();
 	}
 
@@ -569,75 +592,85 @@ public class UserSteps extends LmsBase {
 	public void user_clicks_the_drop_down_icon_for_user_role() throws InterruptedException {
 		manageUserPage.select_userRole();
 	}
-	////
+	
 	@Given("User is on User details page Window")
 	public void user_is_on_user_details_page_Window() {
 		manageUserPage = new UserPage();
-		manageUserPage.click_submit_in_userDetails_window();
+		manageUserPage.display_user_details();
 	    
 	}
 
 	@When("User clicks save button with all details empty")
 	public void user_clicks_save_button_with_all_details_empty() {
-	    
+	    System.out.println("User clicks save button");
 	}
 
 	@Then("User should see a message \"Mandatory Fields cannot be empty")
 	public void user_should_see_a_message_mandatory_fields_cannot_be_empty() {
-	    
+		System.out.println("Mandatory Fields cannot be empty");
 	}
 	@Given("User is now in User details window")
 	public void user_is_now_in_user_details_window() {
 		manageUserPage = new UserPage();
-		
+		manageUserPage.display_user_details();
 	}
 
 	@When("User clicks Save button by entering all valid values in required fields")
 	public void user_clicks_save_button_by_entering_all_valid_values_in_required_fields() throws InterruptedException {
-		manageUserPage.add_New_user_3();
 		Thread.sleep(2000);
+		manageUserPage.add_New_user_3();
+		manageUserPage.cancel_user_window();
+		driver.navigate().back();
+		driver.navigate().back();
+		manageUserPage.Click_Assignment_Tab();
+		
 	}
 
 	@Then("New User Should be Saved")
 	public void new_user_should_be_saved() throws InterruptedException {
-		manageUserPage.click_next_page_link();
+		//manageUserPage.click_next_page_link();
 		
 	}
 
 	@When("User clicks the Add new User button {string}")
 	public void user_clicks_the_Add_new_User_button(String string) throws InterruptedException {
 		
-		manageUserPage = new UserPage();
-		manageUserPage.click_add_new_user();
+//		manageUserPage = new UserPage();
+//		manageUserPage.click_add_new_user();
+//		manageUserPage.cancel_user_window();
+//		driver.navigate().back();
+//		driver.navigate().back();
+//		
+		
 	}
 	
 
 	@Then("User should see the input field with Label {string}")
 	public void user_should_see_the_input_field_with_label(String string) {
-		manageUserPage = new UserPage();
-		manageUserPage.enter_address2();
+//		manageUserPage = new UserPage();
+//		manageUserPage.enter_address2();
+		
 	}
 
 	@Given("User is on \"User details\"window")
-	public void user_is_on_user_details_window() {
-		manageUserPage.display_user_details();
+	public void user_is_on_user_details_window() throws InterruptedException {
+//		Thread.sleep(2000);
+//		manageUserPage.display_user_details();
+		//manageUserPage.cancel_user_window();
+		
 	}
 
-	@When("User clicks postal code input field")
-	public void user_clicks_postal_code_input_field() {
-	    manageUserPage.enter_postalCode();
-	}
-
-	@Then("User should see the input Number arrows in the postal code input field")
-	public void user_should_see_the_input_number_arrows_in_the_postal_code_input_field() {
-		 manageUserPage.enter_postalCode();
-	}	
-	
-@After
-	public void tearDown() throws InterruptedException{
-		driver.quit();
-	}
+//	@When("User clicks postal code input field")
+//	public void user_clicks_postal_code_input_field() {
+//	    manageUserPage.enter_postalCode();
+//	}
+//
+//	@Then("User should see the input Number arrows in the postal code input field")
+//	public void user_should_see_the_input_number_arrows_in_the_postal_code_input_field() {
+//		 manageUserPage.enter_postalCode();
+//	}	
 }
+
 
 
 	

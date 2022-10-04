@@ -1,11 +1,14 @@
 package com.lms.ui.pageObjects;
 
+import java.time.Duration;
 import java.util.List;
 
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 import com.lms.ui.base.LmsBase;
 
@@ -24,8 +27,10 @@ By batch = By.xpath("//input[@data-placeholder='Batch']");
 By skill = By.xpath("//input[@data-placeholder='Skill']");	
 By address = By.xpath("//div//textarea[@ng-reflect-placeholder ='Address']");
 By city = By.xpath("//input[@data-placeholder ='City']");
-By state = By.xpath("//span[contains(text(), 'State')]");
-By stateDropdwn = By.xpath("//span[contains(text(), 'Alabama')]");
+//By state = By.xpath("//span[contains(text(), 'State')]");
+By state = By.id("mat-select-0");
+By stateDropdwn = By.id("mat-select-value 1");
+//By stateDropdwn = By.xpath("//mat-option[@ng-reflect-value = 'AL']");
 By zipCode = By.xpath("//input[@ng-reflect-placeholder = 'Postal Code']");
 By program = By.xpath("//input[@data-placeholder = 'Program']");
 By UGprogram = By.xpath("//input[@ng-reflect-placeholder = 'UG Program']");
@@ -49,7 +54,7 @@ By loginAlert = By.id("errormessage");
 By loginBtn = By.xpath("//span[contains(text(),'Login')]");
 By loginDisplay =By.xpath("//span[contains(text(), 'LMS - Learning Management System')]");
 By paginatorcount = By.xpath("//span[@class = 'p-paginator-pages ng-star-inserted']//button");
-By tableFootertext = By.xpath("//div[contains(text(),'In total there are 4 users.')]");
+By tableFootertext = By.xpath("//div[contains(text(),' In total there are 4 users.')]");
 By userDetailstext = By.xpath("//span[contains(text(),'User Details')]");
 By userWdowcancel = By.xpath("//span[contains(text(),'Cancel')]");
 By sortIcon = By.xpath("//thead//p-sorticon");
@@ -69,6 +74,7 @@ By closeBtn = By.xpath("//span[@ng-reflect-ng-class ='pi pi-times']");
 By userSubmitBtn = By.xpath("//span[contains(text(), 'Submit')]");
 By addCareofInfo = By.xpath("//button//span[contains(text(), '+Add C/O, Apt, Suite, Unit')]");
 By address2 = By.xpath("//textarea[@data-placeholder = 'Address 2' ]");
+By clickOnAssignmentTab = By.xpath("//span[contains(text(), 'Assignment')]");
  public void login() {
 	driver.findElement(userName).click();
 	driver.findElement(userName).sendKeys("LMS");
@@ -159,7 +165,7 @@ By address2 = By.xpath("//textarea[@data-placeholder = 'Address 2' ]");
 			if("2".equals(buttons.get(i).getText()))
 			{
 				buttons.get(i).click();
-				Thread.sleep(2000);
+				Thread.sleep(1000);
 				break;
 			}
 		}
@@ -191,7 +197,7 @@ public void click_previous_page_link() throws InterruptedException {
 		if("1".equals(buttons.get(i).getText()))
 		{
 			buttons.get(i).click();
-			Thread.sleep(2000);
+			Thread.sleep(1000);
 			break;
 		}
 	}
@@ -313,9 +319,10 @@ public void searchfield()  {
 	driver.findElement(searchBox).sendKeys("John");
 	
 }
-public void check_random_user_in_searchfield()  {
+public void check_random_user_in_searchfield() throws InterruptedException  {
 	
 	driver.findElement(searchText).clear();
+	Thread.sleep(3000);
 	driver.findElement(searchBox).sendKeys("Nancy");
 	
 }
@@ -356,11 +363,12 @@ public void display_submit_btn_in_user_details_window()  {
 	driver.findElement(userSubmitBtn).isDisplayed();
 }
 public void select_State() throws InterruptedException  {
-	driver.findElement(state).click();
-	driver.findElement(state).click();
-	Thread.sleep(3000);
+	Thread.sleep(5000);
 	driver.findElement(stateDropdwn).click();
+	WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+	wait.until(ExpectedConditions.elementToBeClickable(state)).click();
 	driver.findElement(stateDropdwn).click();
+
 }
 public void select_userRole() throws InterruptedException  {
 	driver.findElement(userRole).click();
@@ -435,5 +443,8 @@ public void enter_postalCode()   {
 	driver.findElement(zipCode).click();
 	driver.findElement(zipCode).sendKeys("60502");
 }
-
+public void Click_Assignment_Tab() {
+	
+	driver.findElement(clickOnAssignmentTab).click();
+}
 }
